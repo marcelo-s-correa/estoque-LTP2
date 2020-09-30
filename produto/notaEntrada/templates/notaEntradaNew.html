@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block product %}
+<form class="pure-form pure-form-stacked" action="{% url 'notaEntrada:notaEntradaNew' %}" method="post">
+  {% csrf_token %}
+      <fieldset>
+        {% for field in form %}
+          <div class="pure-control-group">
+              <label for="field.auto_id">{{ field.label }}</label>
+              {{ field }}
+              <span class="pure-form-message-inline">Este é um campo obrigatório.</span>
+          </div>
+          {% endfor %}
+      </fieldset>
+
+    <button class="pure-button" type="submit" name="button">Enviar</button>
+</form>
+{% endblock %}

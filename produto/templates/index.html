@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block  product %}
+    <h2><b>Produtos</b></h2>
+
+    <a a class="pure-button pure-button-primary"href = "{% url 'produto:novo' %}"><b>Adicionar novo produto</b></a>
+    <hr> </hr>
+    <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Produto</th>
+            <th>Cor</th>
+            <th>Preço</th>
+            <th>QTD</th>
+            <th>Criado</th>
+            <th>Modificado</th>
+            <th>Modificar</th>
+        </tr>
+    </thead>
+    <tbody>
+     {% for produto in produtos %}
+        <tr>
+            <td>{{produto.id}}</td>
+            <td>{{produto.produto}}</td>
+            <td>{{produto.cor}}</td>
+            <td>{{produto.preco}}</td>
+            <td>{{produto.quantidade}}</td>
+            <td>{{produto.criado}}</td>
+            <td>{{produto.modificado}}</td>
+            <td>{{produtos.produto}} <a href = "{% url 'produto:deletar' produto.id %}">Deletar</a> - <a href ="{% url 'produto:alterar' produto.id %}">Alterar</a> </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2> Gráfico - Produtos em estoque
+<hr></hr>
+
+<canvas id="myChart" width="300" height="100"></canvas>
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{lst_produtos | safe}},
+        datasets: [{
+            label: '#Valor em estoque',
+            data: {{lst_valorEstoque | safe}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+{% endblock %}
+

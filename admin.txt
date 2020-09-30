@@ -1,0 +1,6 @@
+CREDENCIAIS DE ACESSO DJANGO ADMIN
+
+USERNAME : marcelo
+PASSWORD : admin
+E-mail: Marcelo.S.correa10@gmail.com
+

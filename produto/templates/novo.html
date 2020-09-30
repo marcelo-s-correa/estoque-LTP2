@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block product %}
+    <h2>Novo Produto</h2>
+
+    <form class="pure-form pure-form-stacked" action="{% url 'produto:novo' %}" method="POST">
+        {% csrf_token %}
+        <fieldset>
+
+          {% for field in form %}
+            <div class="pure-control-group">
+                <label for="field.auto_id">{{ field.label }}</label>
+                {{ field }}
+                <span class="pure-form-message-inline">Esse é um campo obrigatório.</span>
+            </div>
+            {% endfor %}
+        </fieldset>
+
+        <button class="pure-button pure-button-primary" type="submit">Salvar</button>
+
+    </form>
+{% endblock %}
